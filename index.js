@@ -1,0 +1,47 @@
+const express = require('express');
+const jwt = require('jsonwebtoken');
+const bodyParser = require('body-parser');
+const app = express();
+const cors = require('cors');
+require('dotenv').config()
+
+//Auth Filters
+const basicAuth = require('./security/basic_auth');
+const verifyToken = require('./security/tkn_auth');
+
+//Settings
+const PORT = process.env.PORT || 3000;
+const corsOptions = {
+  origin: ['https://www.example1.com', 'https://www.example2.com'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+// Middleware para analizar las solicitudes con cuerpo JSON
+app.use(bodyParser.json());
+app.set('json spaces', 2);
+
+//CORS
+app.use(cors());
+
+//Rutas - WEB Page
+app.use(require('./web/web_page.js'));
+
+//Rutas - Basic Auth
+app.use(basicAuth)
+app.use('/basic/acceso', require('./ws/acceso_ws.js'));
+
+//Rutas - Token Auth
+app.use(verifyToken);
+app.use('/auth/usuario', require('./ws/usuario_ws.js'));
+app.use('/auth/libreta', require('./ws/libreta_ws.js'));
+
+//Endpoint WildCard
+app.all('*', (req, res) => {
+  res.status(404).json({ error: true, message: "NO EXISTE EL RECURSO SOLICITADO" });
+});
+
+// Inicia el servidor
+app.listen(PORT, () => {
+  console.log(`Servidor iniciado en el puerto ${PORT}`);
+});
