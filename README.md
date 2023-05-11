@@ -1,0 +1,18 @@
+- Crea un nuevo proyecto web en java llamado WebServiceBlogNotas.
+- Cambia el contexto de servicios web que tiene por default tu proyecto de webresources a api, recuerda que este cambio debes hacerlo en la clase ApplicationConfig.java.
+- Crea una nueva clase de tipo Servicio Web llamada: AccesoWS cuyo path de acceso sea: basic/acceso y que implemente los siguientes métodos:
+  - registro - POST - Debe recibir los parámetros necesarios para registrar un nuevo usuario en la base de datos, se debe validar que no exista ya un usuario con el mismo número celular, ya que este dato se usará como username para el servicio de login, por default cuando se registre un nuevo usuario el campo activo tendrá un valor de 0 (inactivo), adicionalmente deberás generar un token de validación de 2 vías u OTP (One Time Password) de 6 caracteres Aleatorios (pueden ser numeros o letras) una vez generado el token deberá ser enviado mediante SMS al número de celular ingresado por el usuario.
+   - activar - POST - Debe recibir como parámetros el numero celular y el OTP y si el OTP es correcto el usuario deberá activarse (poner el campo activo = 1) adicionalmente se deberá registrar la fecha y hora en la cual se activo el usuario (en el campo tiempoActivacion).
+   - login - POST - Debe recibir como parámetros el numero celular y la contraseña y devolver el usuario que coincide con dichas credenciales siempre y cuando este activo. Adicionalmente deberá generar un TOKEN con JWT que contenga los metadatos del usuario autenticado ya que dicho token se usará en el resto de peticiones de servicios web. En caso de no encontrar ningún usuario válido deberá devolver un mensaje de error de credenciales.
+- Crea una nueva clase de tipo Servicio Web llamada: UsuarioWS cuyo path de acceso sea: auth/usuario y que implemente los siguientes métodos:
+  - actualizar - PUT - Debe recibir los parámetros necesarios para actualizar los datos de un usuario en particular (se debe enviar siempre el idusuario del usuario que está autenticado), los datos que se pueden actualizar mediante este servicio son solo: nombres, apellidos, contraseña.
+- Crea una nueva clase de tipo Servicio Web llamada: LibretaWS cuyo path de acceso sea: auth/libreta y que implemente los siguientes métodos:
+  - consultar - GET - Debe recibir como parámetro el idusuario y devolver una lista de todas las libretas que pertenecen a usuario.
+  - registrar - POST - Debe recibir los parámetros necesarios para registrar una nueva libreta, se debe validar que no existan 2 libretas con el mismo nombre para le mismo usuario.
+  - actualizar - PUT - Debe recibir los parámetros necesarios para editar una libreta ya existente, los datos que se pueden actualizar son: nombre y colorHexadecimal, manteniendo la validación del método de registrar.
+  - eliminar - DELETE - Debe recibir el idLibreta que se desea eliminar, se deberá validar que no existan notas asociadas a la libreta, en caso de existir notas en la libreta deberá devolver un mensaje de error indicando que no se puede eliminar la libreta, en caso contrario deberá hacer la eliminación en la base de datos y devolver un mensaje de éxito.
+- Habilita en tu proyecto el Filtro CORS para Todas las peticiones del API.
+- Habilita en tu proyecto el mecanismo de Autenticación Básica para todos las peticiones cuyo path inicie con basic/
+- Habilita en tu proyecto el mecanismo de Autenticación Basada en Token para todos las peticiones cuyo path inicie con auth/
+- Prueba todos los métodos de tus 3 clases de servicios web en la aplicación de POSTMAN:
+- Crea una colección en POSTMAN con el nombre WS_BlogNotas, en dicha colección guarda las peticiones de cada uno de tus recursos web.

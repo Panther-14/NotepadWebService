@@ -1,13 +1,18 @@
 const { Router } = require('express');
 const router = Router();
 
-const jwt = require('jsonwebtoken');
-const SECRET_KEY = process.env.SECRET_KEY;
+const basicAuth = require('../security/basic_auth');
+const Usuario = require('../dataaccess/domain/usuario');
+const UsuarioBusiness = require('../businesslogic/users');
 
+const jwt = require('jsonwebtoken');
+
+const SECRET_KEY = process.env.SECRET_KEY;
 const USERNAME = process.env.USERNAME;
 const PASSWORD = process.env.PASSWORD;
 
-// Endpoint para generar un token
+router.use(basicAuth);
+
 router.post('/login', (req, res) => {
   // Obtiene el nombre de usuario y la contraseña del cuerpo de la solicitud
   const { username, password } = req.body;
@@ -30,10 +35,51 @@ router.post('/login', (req, res) => {
 });
 
 router.post('/registro', (req, res) => {
-  const { username, oldPassword, newPassword } = req.body;
+  const {
+    nombre,
+    apellidos,
+    celular,
+    contrasenia,
+  } = req.body;
+
+  const otp = '123456';
+  
+  const usuario = new Usuario(
+    nombre,
+    apellidos,
+    new Date().toISOString(),
+    0,
+    celular,
+    contrasenia,
+    '',
+    null,
+    otp,
+    null
+  );
+  
+  UsuarioBusiness.registroUsuarios(usuario)
+  .then((resultados) => {
+    console.log('Resultados:', resultados);
+    res.status(200).json({ error: true, message: 'Registro exitoso' });
+  })
+  .catch((error) => {
+    console.error('Error en el registro:', error);
+    res.status(500).json({ error: true, message: 'Error en el registro' });
+  });
+  
 });
 
 router.post('/activar', (req, res) => {
+  const { celular, otp } = req.body;
+  UsuarioBusiness.activateUser(celular, opt)
+  .then((resultados) => {
+    console.log('Resultados:', resultados);
+    res.status(200).json({ error: true, message: 'Registro exitoso' });
+  })
+  .catch((error) => {
+    console.error('Error en el registro:', error);
+    res.status(500).json({ error: true, message: 'Error en el registro' });
+  });
 });
 
 module.exports = router;

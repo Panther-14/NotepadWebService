@@ -1,0 +1,71 @@
+const connection = require('../db_connection');
+
+function registroUsuario(user) {
+  return new Promise((resolve, reject) => {
+    const sql = 'INSERT INTO usuario SET ?';
+
+    connection.query(sql, user, (error, results) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(results);
+    });
+
+    connection.end();
+  });
+}
+
+function activarUsuario(celular, opt) {
+  return new Promise((resolve, reject) => {
+    const sql = 'UPDATE usuario SET activo = ?, tiempoActivacion = ? WHERE celular = ?';
+    const values = [1, new Date().toISOString(), celular];
+
+    connection.query(sql, values, (error, results, fields) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(results);
+    });
+
+    connection.end();
+  });
+}
+
+function actualizarUsuario({ idUsuario, nombre, apellidos, contrasena }) {
+  return new Promise((resolve, reject) => {
+    const sql = 'UPDATE usuario SET nombre = ?, apellidos = ?, contrasena = ? WHERE idUsuario = ?';
+    const values = [nombre, apellidos, contrasena, idUsuario];
+
+    connection.query(sql, values, (error, results, fields) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(results);
+    });
+
+    connection.end();
+  });
+}
+
+function obtenerUsuario(idUsuario) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT * FROM usuarios WHERE idUsuario = ?';
+
+    connection.query(sql, idUsuario, (error, results) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(results);
+    });
+
+    connection.end();
+  });
+}
+module.exports = {
+  registroUsuario,
+  activarUsuario,
+  actualizarUsuario,
+  obtenerUsuario
+};
