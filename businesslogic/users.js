@@ -29,18 +29,10 @@ async function updateUser({ nombre, apellidos, contrasena }) {
   }
 }
 
-async function selectUser(idUsuario){
-  try {
-    const resultados = await UserDAO.actualizarUsuario(idUsuario);
-    return resultados;
-  } catch (error) {
-    console.error(error);
-  }
-}
+
 
 module.exports = {
   registerUser,
   activateUser,
   updateUser,
-  selectUser
 }

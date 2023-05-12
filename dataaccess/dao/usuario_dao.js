@@ -48,24 +48,8 @@ function actualizarUsuario({ idUsuario, nombre, apellidos, contrasena }) {
   });
 }
 
-function obtenerUsuario(idUsuario) {
-  return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM usuarios WHERE idUsuario = ?';
-
-    connection.query(sql, idUsuario, (error, results) => {
-      if (error) {
-        reject(error);
-        return;
-      }
-      resolve(results);
-    });
-
-    connection.end();
-  });
-}
 module.exports = {
   registroUsuario,
   activarUsuario,
   actualizarUsuario,
-  obtenerUsuario
 };
