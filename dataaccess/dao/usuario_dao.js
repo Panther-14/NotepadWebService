@@ -7,7 +7,6 @@ function registroUsuario(user) {
     connection.query(sql, user, (error, results) => {
       if (error) {
         reject(error);
-        return;
       }
       resolve(results);
     });

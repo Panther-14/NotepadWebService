@@ -4,10 +4,6 @@ const app = express();
 const cors = require('cors');
 require('dotenv').config()
 
-// Auth Filters
-//const basicAuth = require('./security/basic_auth');
-//const verifyToken = require('./security/tkn_auth');
-
 // Settings
 const PORT = process.env.PORT || 3000;
 const corsOptions = {
@@ -24,14 +20,13 @@ app.set('json spaces', 2);
 app.use(cors());
 
 // Rutas - WEB Page
+app.use(express.static('./web/src'));
 app.use(require('./web/web_page.js'));
 
 // Rutas - Basic Auth
-//app.use(basicAuth);
 app.use('/basic/acceso', require('./ws/acceso_ws.js'));
 
 // Rutas - Token Auth
-//app.use(verifyToken);
 app.use('/auth/usuario', require('./ws/usuario_ws.js'));
 app.use('/auth/libreta', require('./ws/libreta_ws.js'));
 

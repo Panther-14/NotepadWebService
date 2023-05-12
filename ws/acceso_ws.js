@@ -43,7 +43,7 @@ router.post('/registro', (req, res) => {
   } = req.body;
 
   const otp = '123456';
-  
+
   const usuario = new Usuario(
     nombre,
     apellidos,
@@ -56,30 +56,30 @@ router.post('/registro', (req, res) => {
     otp,
     null
   );
-  
+
   UsuarioBusiness.registroUsuarios(usuario)
-  .then((resultados) => {
-    console.log('Resultados:', resultados);
-    res.status(200).json({ error: true, message: 'Registro exitoso' });
-  })
-  .catch((error) => {
-    console.error('Error en el registro:', error);
-    res.status(500).json({ error: true, message: 'Error en el registro' });
-  });
-  
+    .then((resultados) => {
+      console.log('Resultados:', resultados);
+      res.status(200).json({ error: true, message: 'Registro exitoso' });
+    })
+    .catch((error) => {
+      console.error('Error en el registro:', error);
+      res.status(500).json({ error: true, message: 'Error en el registro' });
+    });
+
 });
 
 router.post('/activar', (req, res) => {
   const { celular, otp } = req.body;
-  UsuarioBusiness.activateUser(celular, opt)
-  .then((resultados) => {
-    console.log('Resultados:', resultados);
-    res.status(200).json({ error: true, message: 'Registro exitoso' });
-  })
-  .catch((error) => {
-    console.error('Error en el registro:', error);
-    res.status(500).json({ error: true, message: 'Error en el registro' });
-  });
+  UsuarioBusiness.activateUser(celular, otp)
+    .then((resultados) => {
+      console.log('Resultados:', resultados);
+      res.status(200).json({ error: true, message: 'Registro exitoso' });
+    })
+    .catch((error) => {
+      console.error('Error en el registro:', error);
+      res.status(500).json({ error: true, message: 'Error en el registro' });
+    });
 });
 
 module.exports = router;
