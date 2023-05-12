@@ -4,9 +4,9 @@ const PASSWORD = process.env.PASSWORD;
 // Middleware para la autenticación básica
 function basicAuth(req, res, next) {
   // Obtiene las credenciales de usuario del encabezado de la solicitud
-  const authHeader = req.headers['authorization'];
+  const authHeader = req.headers['authorization'] ||  req.headers.authorization.indexOf('Basic ');
   if (!authHeader) {
-    res.status(401).json({ error: true, message: "Upss" });
+    res.status(401).json({ error: true, message: "Unauthorized Head" });
     return;
   }
 
@@ -20,7 +20,7 @@ function basicAuth(req, res, next) {
     next();
   } else {
     // Las credenciales son inválidas, retorna un error de autenticación
-    res.status(401).json({ error: true, message: "Upss" });
+    res.status(401).json({ error: true, message: "Unauthorized", cred: [username, USERNAME, password, PASSWORD] });
   }
 }
 

@@ -23,14 +23,14 @@ router.post('/login', (req, res) => {
     jwt.sign({ user: { username } }, SECRET_KEY, { expiresIn: '1h' }, (err, token) => {
       if (err) {
         console.error(err);
-        res.status(500).json({ error: true, message: "Upss" });
+        res.status(500).json({ error: true, message: "Upss, token" });
         return;
       }
       res.json({ token });
     });
   } else {
     // Credenciales inválidas, retorna un error de autenticación
-    res.status(401).json({ error: true, message: "Credenciales inválidas" });
+    res.status(401).json({ error: true, message: "Credenciales inválidas", cred: [username, USERNAME, password, PASSWORD] });
   }
 });
 
