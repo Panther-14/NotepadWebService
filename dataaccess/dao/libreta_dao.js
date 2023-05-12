@@ -35,7 +35,7 @@ function registrarLibretaUsuario({ nombre, colorHexadecimal, idUsuario }) {
 
 function actualizarLibretaUsuario({ nombre, colorHexadecimal, idLibreta, idUsuario }) {
   return new Promise((resolve, reject) => {
-    const sql = '';
+    const sql = 'UPDATE libretas SET nombre = nombre, colorHexadecimal = colorHexadecimal WHERE idLibreta = idLibreta AND idUsuario = idUsuario;';
     const values = [nombre, colorHexadecimal, idLibreta, idUsuario];
 
     connection.query(sql, values, (error, results) => {
@@ -52,7 +52,7 @@ function actualizarLibretaUsuario({ nombre, colorHexadecimal, idLibreta, idUsuar
 
 function eliminarLibretaUsuario({ idLibreta, idUsuario }) {
   return new Promise((resolve, reject) => {
-    const sql = '';
+    const sql = 'DELETE FROM libretas WHERE idLibreta = idLibreta;';
     const values = [idLibreta, idUsuario];
 
     connection.query(sql, values, (error, results) => {
