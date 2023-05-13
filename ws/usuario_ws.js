@@ -28,7 +28,6 @@ router.put('/actualizar', (req, res) => {
     console.error('Error en el registro:', error);
     res.status(500).json({ error: true, message: 'Error en el registro' });
   });
-  console.log({ idusuario, nombre, apellidos, contrasena });
 });
 
 module.exports = router;

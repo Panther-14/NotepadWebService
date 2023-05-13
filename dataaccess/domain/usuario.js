@@ -1,11 +1,11 @@
 module.exports = class Usuario {
-  constructor(nombre, apellidos, tiempoRegistro, activo, celular, contrasenia, ultimoTokenAcceso, tiempoUltimoAcceso, otp, tiempoActivacion) {
-    this.nombre = nombre;
+  constructor(nombres, apellidos, tiempoRegistro, activo, celular, contrasena, ultimoTokenAcceso, tiempoUltimoAcceso, otp, tiempoActivacion) {
+    this.nombres = nombres;
     this.apellidos = apellidos;
     this.tiempoRegistro = tiempoRegistro;
     this.activo = activo;
     this.celular = celular;
-    this.contrasenia = contrasenia;
+    this.contrasena = contrasena;
     this.ultimoTokenAcceso = ultimoTokenAcceso;
     this.tiempoUltimoAcceso = tiempoUltimoAcceso;
     this.otp = otp;

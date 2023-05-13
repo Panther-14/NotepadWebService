@@ -1,5 +1,14 @@
 const UserDAO = require('../dataaccess/dao/usuario_dao');
 
+async function loginUser(username, password) {
+  try {
+    const resultados = await UserDAO.accederUsuario(username, password);
+    return resultados;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 async function registerUser(user) {
   try {
     const resultados = await UserDAO.registroUsuario(user);
@@ -23,7 +32,6 @@ async function updateUser({ idUsuario, nombre, apellidos, contrasena }) {
     const resultados = await UserDAO.actualizarUsuario({
       idUsuario, nombre, apellidos, contrasena
     });
-    console.log({ idUsuario, nombre, apellidos, contrasena });
     return resultados;
   } catch (error) {
     console.error(error);
@@ -33,6 +41,7 @@ async function updateUser({ idUsuario, nombre, apellidos, contrasena }) {
 
 
 module.exports = {
+  loginUser,
   registerUser,
   activateUser,
   updateUser,

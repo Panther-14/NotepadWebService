@@ -1,8 +1,23 @@
 const connection = require('../db_connection');
 
+function accederUsuario(username, password) {
+  return new Promise((resolve, reject) => {
+    const sql = 'SELECT celular, contrasena FROM usuarios WHERE celular = ? AND contrasena = ?';
+    const values = [username, password];
+    connection.query(sql, values, (error, results, fields) => {
+      if (error) {
+        reject(error);
+      }
+      resolve(results);
+    });
+
+    connection.end();
+  });
+}
+
 function registroUsuario(user) {
   return new Promise((resolve, reject) => {
-    const sql = 'INSERT INTO usuario SET ?';
+    const sql = 'INSERT INTO usuarios SET ?';
 
     connection.query(sql, user, (error, results) => {
       if (error) {
@@ -15,10 +30,10 @@ function registroUsuario(user) {
   });
 }
 
-function activarUsuario(celular, opt) {
+function activarUsuario(celular, otp) {
   return new Promise((resolve, reject) => {
-    const sql = 'UPDATE usuario SET activo = ?, tiempoActivacion = ? WHERE celular = ?';
-    const values = [1, new Date().toISOString(), celular];
+    const sql = 'UPDATE usuarios SET activo = ?, otp = ?, tiempoActivacion = ? WHERE celular = ?';
+    const values = [1, otp, new Date().toISOString().slice(0, 19).replace('T', ' '), celular];
 
     connection.query(sql, values, (error, results, fields) => {
       if (error) {
@@ -34,7 +49,6 @@ function activarUsuario(celular, opt) {
 function actualizarUsuario({ idUsuario, nombre, apellidos, contrasena }) {
   return new Promise((resolve, reject) => {
     const sql = 'UPDATE usuarios SET nombres = ?, apellidos = ?, contrasena = ? WHERE idUsuario = ?';
-    console.log({ idUsuario, nombre, apellidos, contrasena });
     const values = [nombre, apellidos, contrasena, idUsuario];
 
     connection.query(sql, values, (error, results, fields) => {
@@ -49,6 +63,7 @@ function actualizarUsuario({ idUsuario, nombre, apellidos, contrasena }) {
 }
 
 module.exports = {
+  accederUsuario,
   registroUsuario,
   activarUsuario,
   actualizarUsuario,
