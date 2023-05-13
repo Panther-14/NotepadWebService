@@ -4,12 +4,12 @@ const router = Router();
 const basicAuth = require("../security/basic_auth");
 const Usuario = require("../dataaccess/domain/usuario");
 const UsuarioBusiness = require("../businesslogic/users");
+const generateRandomNumber = require("../util/otp_generator");
+const sendMessage = require("../util/sms_sender");
 
 const jwt = require("jsonwebtoken");
 
 const SECRET_KEY = process.env.SECRET_KEY;
-const USERNAME = process.env.USERNAME;
-const PASSWORD = process.env.PASSWORD;
 
 router.use(basicAuth);
 
@@ -45,7 +45,8 @@ router.post("/login", (req, res) => {
 router.post("/registro", (req, res) => {
   const { nombres, apellidos, celular, contrasena } = req.body;
 
-  const otp = Math.floor(Math.random() * (999999 - 100000) + 100000);
+  const otp = generateRandomNumber(6);
+  console.log(otp);
 
   const usuario = new Usuario(
     nombres,
@@ -64,6 +65,7 @@ router.post("/registro", (req, res) => {
     .then((resultados) => {
       console.log("Resultados:", resultados);
       if(resultados.affectedRows> 0){
+        sendMessage(celular, otp);
         res.status(200).json({ error: false, message: 'Registro de Usuario exitosa', affectedRows: resultados.affectedRows });
       }else{
         res.status(200).json({ error: false, message: 'Nada que Actualizar', affectedRows: resultados.affectedRows });
