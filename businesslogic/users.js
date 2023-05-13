@@ -18,11 +18,12 @@ async function activateUser(celular, opt) {
   }
 }
 
-async function updateUser({ nombre, apellidos, contrasena }) {
+async function updateUser({ idUsuario, nombre, apellidos, contrasena }) {
   try {
     const resultados = await UserDAO.actualizarUsuario({
       idUsuario, nombre, apellidos, contrasena
     });
+    console.log({ idUsuario, nombre, apellidos, contrasena });
     return resultados;
   } catch (error) {
     console.error(error);

@@ -33,7 +33,8 @@ function activarUsuario(celular, opt) {
 
 function actualizarUsuario({ idUsuario, nombre, apellidos, contrasena }) {
   return new Promise((resolve, reject) => {
-    const sql = 'UPDATE usuario SET nombre = ?, apellidos = ?, contrasena = ? WHERE idUsuario = ?';
+    const sql = 'UPDATE usuarios SET nombres = ?, apellidos = ?, contrasena = ? WHERE idUsuario = ?';
+    console.log({ idUsuario, nombre, apellidos, contrasena });
     const values = [nombre, apellidos, contrasena, idUsuario];
 
     connection.query(sql, values, (error, results, fields) => {
