@@ -75,7 +75,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nombres\": \"Pablo\",\r\n    \"apellidos\": \"Martinez\",\r\n    \"contrasena\": \"123456\",\r\n    \"celular\": \"1234567891\"\r\n}",
+							"raw": "{\r\n    \"nombres\": \"Panther\",\r\n    \"apellidos\": \"Hunter\",\r\n    \"contrasena\": \"123456\",\r\n    \"celular\": \"+521234567890\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -120,7 +120,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"celular\": \"1234567890\",\r\n    \"opt\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"celular\": \"1234567891\",\r\n    \"opt\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -195,9 +195,6 @@
 			"item": [
 				{
 					"name": "Consultar Libreta",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -211,10 +208,6 @@
 						},
 						"method": "GET",
 						"header": [],
-						"body": {
-							"mode": "urlencoded",
-							"urlencoded": []
-						},
 						"url": {
 							"raw": "http://localhost:3000/auth/libreta/consultar/1",
 							"protocol": "http",
