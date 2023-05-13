@@ -38,7 +38,7 @@ router.post("/login", (req, res) => {
     })
     .catch((error) => {
       console.error("Error en el registro:", error);
-      res.status(500).json({ error: true, message: 'Error en la consulta' });
+      res.status(500).json({ error: true, message: 'Error al iniciar sesión' });
     });
 });
 
@@ -63,7 +63,11 @@ router.post("/registro", (req, res) => {
   UsuarioBusiness.registerUser(usuario)
     .then((resultados) => {
       console.log("Resultados:", resultados);
-      res.status(200).json({ error: false, message: "Registro exitoso" });
+      if(resultados.affectedRows> 0){
+        res.status(200).json({ error: false, message: 'Registro de Usuario exitosa', affectedRows: resultados.affectedRows });
+      }else{
+        res.status(200).json({ error: false, message: 'Nada que Actualizar', affectedRows: resultados.affectedRows });
+      }
     })
     .catch((error) => {
       console.error("Error en el registro:", error);
@@ -76,11 +80,15 @@ router.post("/activar", (req, res) => {
   UsuarioBusiness.activateUser(celular, otp)
     .then((resultados) => {
       console.log("Resultados:", resultados);
-      res.status(200).json({ error: false, message: "Registro exitoso" });
+      if(resultados.affectedRows> 0){
+        res.status(200).json({ error: false, message: 'Activación de Usuario exitosa', affectedRows: resultados.affectedRows });
+      }else{
+        res.status(200).json({ error: false, message: 'Nada que Actualizar', affectedRows: resultados.affectedRows });
+      }
     })
     .catch((error) => {
       console.error("Error en el registro:", error);
-      res.status(500).json({ error: true, message: "Error en el registro" });
+      res.status(500).json({ error: true, message: "Error en la activación" });
     });
 });
 

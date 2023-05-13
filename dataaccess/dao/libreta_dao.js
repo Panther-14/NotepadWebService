@@ -11,8 +11,6 @@ function obtenerLibretasUsuario(idUsuario) {
       }
       resolve(results);
     });
-
-    connection.end();
   });
 }
 
@@ -28,14 +26,12 @@ function registrarLibretaUsuario({ nombre, colorHexadecimal, idUsuario }) {
       }
       resolve(results);
     });
-
-    connection.end();
   });
 }
 
 function actualizarLibretaUsuario({ nombre, colorHexadecimal, idLibreta, idUsuario }) {
   return new Promise((resolve, reject) => {
-    const sql = 'UPDATE libretas SET nombre = nombre, colorHexadecimal = colorHexadecimal WHERE idLibreta = idLibreta AND idUsuario = idUsuario;';
+    const sql = 'UPDATE libretas SET nombre = ?, colorHexadecimal = ? WHERE idLibreta = ? AND idUsuario = ?;';
     const values = [nombre, colorHexadecimal, idLibreta, idUsuario];
 
     connection.query(sql, values, (error, results) => {
@@ -45,14 +41,12 @@ function actualizarLibretaUsuario({ nombre, colorHexadecimal, idLibreta, idUsuar
       }
       resolve(results);
     });
-
-    connection.end();
   });
 }
 
 function eliminarLibretaUsuario({ idLibreta, idUsuario }) {
   return new Promise((resolve, reject) => {
-    const sql = 'DELETE FROM libretas WHERE idLibreta = idLibreta;';
+    const sql = 'DELETE FROM libretas WHERE idLibreta = ? AND idUsuario = ?;';
     const values = [idLibreta, idUsuario];
 
     connection.query(sql, values, (error, results) => {
@@ -62,8 +56,6 @@ function eliminarLibretaUsuario({ idLibreta, idUsuario }) {
       }
       resolve(results);
     });
-
-    connection.end();
   });
 }
 

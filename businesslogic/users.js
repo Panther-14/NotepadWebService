@@ -6,6 +6,7 @@ async function loginUser(username, password) {
     return resultados;
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 
@@ -15,6 +16,7 @@ async function registerUser(user) {
     return resultados;
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 
@@ -24,6 +26,7 @@ async function activateUser(celular, opt) {
     return resultados;
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 
@@ -35,6 +38,7 @@ async function updateUser({ idUsuario, nombre, apellidos, contrasena }) {
     return resultados;
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 

@@ -7,9 +7,9 @@ require('dotenv').config()
 // Settings
 const PORT = process.env.PORT || 3000;
 const corsOptions = {
-  origin: ['https://www.example1.com', 'https://www.example2.com'],
+  origin: ['Overlord'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  allowedHeaders: ['*'],
 };
 
 // Middleware para analizar las solicitudes con cuerpo JSON
@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.set('json spaces', 2);
 
 // CORS
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Rutas - WEB Page
 app.use(express.static('./web/src'));

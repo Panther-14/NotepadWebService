@@ -6,6 +6,7 @@ async function selectUserNotebooks(idUsuario){
     return resultados;
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 
@@ -15,6 +16,7 @@ async function insertNotebook({ nombre, colorHexadecimal, idUsuario }){
     return resultados;
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 
@@ -24,6 +26,7 @@ async function updateNotebook({ nombre, colorHexadecimal, idLibreta, idUsuario }
     return resultados;
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 
@@ -33,6 +36,7 @@ async function deleteNotebook({ idLibreta, idUsuario }){
     return resultados;
   } catch (error) {
     console.error(error);
+    return error;
   }
 }
 

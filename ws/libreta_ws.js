@@ -8,10 +8,15 @@ router.use(verifyToken);
 
 router.get('/consultar/:idUsuario', (req, res) => {
   const idUsuario = req.params.idUsuario;
+
   LibretaBusiness.selectUserNotebooks(idUsuario)
     .then((resultados) => {
       console.log('Resultados:', resultados);
-      res.status(200).json({ error: false, message: 'Consulta exitosa', resultados: resultados });
+      if(resultados.length > 0){
+        res.status(200).json({ error: false, message: 'Consulta de Libreta exitosa', resultados: resultados});
+      }else{
+        res.status(200).json({ error: false, message: 'Nada que mostrar', resultados: resultados});
+      }
     })
     .catch((error) => {
       console.error('Error en la consulta:', error);
@@ -21,10 +26,15 @@ router.get('/consultar/:idUsuario', (req, res) => {
 
 router.post('/registrar', (req, res) => {
   const { nombre, colorHexadecimal, idUsuario } = req.body;
+  
   LibretaBusiness.insertNotebook({ nombre, colorHexadecimal, idUsuario })
     .then((resultados) => {
       console.log('Resultados:', resultados);
-      res.status(200).json({ error: false, message: 'Registro exitoso' });
+      if(resultados.affectedRows > 0){
+        res.status(200).json({ error: false, message: 'Registro de Libreta exitosa', affectedRows: resultados.affectedRows });
+      }else{
+        res.status(200).json({ error: false, message: 'Nada que Actualizar', affectedRows: resultados.affectedRows });
+      }
     })
     .catch((error) => {
       console.error('Error en el registro:', error);
@@ -37,7 +47,11 @@ router.put('/actualizar', (req, res) => {
   LibretaBusiness. updateNotebook({ nombre, colorHexadecimal, idLibreta, idUsuario })
     .then((resultados) => {
       console.log('Resultados:', resultados);
-      res.status(200).json({ error: false, message: 'Actualización exitosa' });
+      if(resultados.affectedRows > 0){
+        res.status(200).json({ error: false, message: 'Actualización de Libreta exitosa', affectedRows: resultados.affectedRows });
+      }else{
+        res.status(200).json({ error: false, message: 'Nada que Actualizar', affectedRows: resultados.affectedRows });
+      }
     })
     .catch((error) => {
       console.error('Error en el registro:', error);
@@ -50,7 +64,11 @@ router.delete('/eliminar', (req, res) => {
   LibretaBusiness.deleteNotebook({ idLibreta, idUsuario })
     .then((resultados) => {
       console.log('Resultados:', resultados);
-      res.status(200).json({ error: false, message: 'Eliminación exitosa' });
+      if(resultados.affectedRows > 0){
+        res.status(200).json({ error: false, message: 'Eliminación de Libreta exitosa', affectedRows: resultados.affectedRows });
+      }else{
+        res.status(200).json({ error: false, message: 'Nada que Actualizar', affectedRows: resultados.affectedRows });
+      }
     })
     .catch((error) => {
       console.error('Error en el registro:', error);

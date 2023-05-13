@@ -7,11 +7,10 @@ function accederUsuario(username, password) {
     connection.query(sql, values, (error, results, fields) => {
       if (error) {
         reject(error);
+        return;
       }
       resolve(results);
     });
-
-    connection.end();
   });
 }
 
@@ -22,11 +21,10 @@ function registroUsuario(user) {
     connection.query(sql, user, (error, results) => {
       if (error) {
         reject(error);
+        return;
       }
       resolve(results);
     });
-
-    connection.end();
   });
 }
 
@@ -38,11 +36,10 @@ function activarUsuario(celular, otp) {
     connection.query(sql, values, (error, results, fields) => {
       if (error) {
         reject(error);
+        return;
       }
       resolve(results);
     });
-
-    connection.end();
   });
 }
 
@@ -54,11 +51,10 @@ function actualizarUsuario({ idUsuario, nombre, apellidos, contrasena }) {
     connection.query(sql, values, (error, results, fields) => {
       if (error) {
         reject(error);
+        return;
       }
       resolve(results);
     });
-
-    connection.end();
   });
 }
 

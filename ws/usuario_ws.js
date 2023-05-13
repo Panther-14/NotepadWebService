@@ -8,21 +8,25 @@ router.use(verifyToken);
 
 router.put('/actualizar', (req, res) => {
   const {
-    idusuario,
+    idUsuario,
     nombre,
     apellidos,
     contrasena,
   } = req.body;
   
   UsuarioBusiness.updateUser({
-    idUsuario: idusuario,
+    idUsuario: idUsuario,
     nombre: nombre,
     apellidos: apellidos,
     contrasena: contrasena
   })
   .then((resultados) => {
     console.log('Resultados:', resultados);
-    res.status(200).json({ error: false, message: 'Registro exitoso' });
+    if(resultados.affectedRows> 0){
+      res.status(200).json({ error: false, message: 'Actualización de Usuario exitosa', affectedRows: resultados.affectedRows });
+    }else{
+      res.status(200).json({ error: false, message: 'Nada que Actualizar', affectedRows: resultados.affectedRows });
+    }
   })
   .catch((error) => {
     console.error('Error en el registro:', error);
