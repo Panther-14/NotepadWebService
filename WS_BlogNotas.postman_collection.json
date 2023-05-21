@@ -240,7 +240,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiMTIzNDU2Nzg5MSJ9LCJpYXQiOjE2ODQwMDUwNzgsImV4cCI6MTY4NDAwODY3OH0.7QtHqxV8fpD2AV8pgqlC4006WWhqTjUrb4O8err8glA",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiMTIzNDU2Nzg5MSJ9LCJpYXQiOjE2ODQ2MTk4MDAsImV4cCI6MTY4NDYyMzQwMH0.hVC6FilLHrX7NWf1JnFbCEP1xBgjAyoTQBh7Q2OhRVY",
 									"type": "string"
 								}
 							]
@@ -346,6 +346,210 @@
 							"path": [
 								"auth",
 								"libreta",
+								"eliminar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Prioridad",
+			"item": [
+				{
+					"name": "Consultar Prioridad",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiMTIzNDU2Nzg5MSJ9LCJpYXQiOjE2ODQ2MTk4MDAsImV4cCI6MTY4NDYyMzQwMH0.hVC6FilLHrX7NWf1JnFbCEP1xBgjAyoTQBh7Q2OhRVY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/auth/prioridad/consultar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"prioridad",
+								"consultar"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Nota",
+			"item": [
+				{
+					"name": "Consultar Nota",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiMTIzNDU2Nzg5MSJ9LCJpYXQiOjE2ODQ2MjQ4MTYsImV4cCI6MTY4NDYyODQxNn0.cp7J0UF44Lz10qQWyWQdFk5NsDo-rgi-y5x8ziFtfFY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idUsuario\": 1,\r\n    \"idLibreta\": 3,\r\n    \"idPrioridad\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/nota/consultar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"nota",
+								"consultar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Nota",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiMTIzNDU2Nzg5MSJ9LCJpYXQiOjE2ODQ2MjQ4MTYsImV4cCI6MTY4NDYyODQxNn0.cp7J0UF44Lz10qQWyWQdFk5NsDo-rgi-y5x8ziFtfFY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idLibreta\": 3,\r\n    \"idPrioridad\": 1,\r\n    \"idUsuario\": 1,\r\n    \"titulo\": \"Panther Returns II\",\r\n    \"contenido\": \"Hola, soy Panther y estoy de vuelta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/nota/registrar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"nota",
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Nota",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiMTIzNDU2Nzg5MSJ9LCJpYXQiOjE2ODQ2MjQ4MTYsImV4cCI6MTY4NDYyODQxNn0.cp7J0UF44Lz10qQWyWQdFk5NsDo-rgi-y5x8ziFtfFY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idNota\": 3,\r\n    \"idPrioridad\": 1,\r\n    \"idUsuario\": 1,\r\n    \"titulo\": \"Panther Returns III\",\r\n    \"contenido\": \"Hola, soy Panther y estoy de vuelta\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/nota/actualizar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"nota",
+								"actualizar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Nota",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJuYW1lIjoiMTIzNDU2Nzg5MSJ9LCJpYXQiOjE2ODQ2MjQ4MTYsImV4cCI6MTY4NDYyODQxNn0.cp7J0UF44Lz10qQWyWQdFk5NsDo-rgi-y5x8ziFtfFY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idNota\": 3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/auth/nota/eliminar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"auth",
+								"nota",
 								"eliminar"
 							]
 						}

@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const cors = require('cors');
-require('dotenv').config()
+require('dotenv').config({ path: './.env' })
 
 // Settings
 const PORT = process.env.PORT || 3000;
@@ -29,6 +29,8 @@ app.use('/basic/acceso', require('./ws/acceso_ws.js'));
 // Rutas - Token Auth
 app.use('/auth/usuario', require('./ws/usuario_ws.js'));
 app.use('/auth/libreta', require('./ws/libreta_ws.js'));
+app.use('/auth/prioridad', require('./ws/prioridad_ws.js'));
+app.use('/auth/nota', require('./ws/nota_ws.js'));
 
 // Endpoint WildCard
 app.all('*', (req, res) => {
