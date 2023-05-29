@@ -12,9 +12,9 @@ router.get("/consultar", (req, res) => {
     .then((resultados) => {
         console.log("Resultados:", resultados);
         if (resultados.length > 0) {
-            res.status(200).json({ error: false, message: "Consulta de Notas exitosa", resultados: resultados });
+            res.status(200).json({ error: false, message: "Consulta de Notas exitosa", notes: resultados });
         } else {
-            res.status(200).json({ error: false, message: "Nada que mostrar", resultados: resultados });
+            res.status(200).json({ error: false, message: "Nada que mostrar", notes: resultados });
         }
     })
     .catch((error) => {
@@ -24,7 +24,7 @@ router.get("/consultar", (req, res) => {
 });
 
 router.post("/registrar", (req, res) => {
-    const { idLibreta, idPrioridad, idUsuario, titulo, contenido, tiempoCreacion, eliminado } = req.body;
+    const { idLibreta, idPrioridad, idUsuario, titulo, contenido } = req.body;
     
     const nota = {
         idLibreta: idLibreta,
@@ -77,8 +77,8 @@ router.put("/actualizar", (req, res) => {
 });
 
 router.delete("/eliminar", (req, res) => {
-    const {idNota } = req.body;
-    NotaBusiness.deleteNote(idNota)
+    const { idNota, idUsuario } = req.body;
+    NotaBusiness.deleteNote(idNota, idUsuario)
     .then((resultados) => {
         console.log(resultados);
         if(resultados.affectedRows > 0){

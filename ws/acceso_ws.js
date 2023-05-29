@@ -15,7 +15,10 @@ router.use(basicAuth);
 
 router.post("/login", (req, res) => {
   // Obtiene el nombre de usuario y la contraseña del cuerpo de la solicitud
-  const { username, password } = req.body;
+  const { celular: username, contrasena: password } = req.body;
+
+
+  console.log(req.body);
 
   UsuarioBusiness.loginUser(username, password)
     .then((resultados) => {
@@ -26,18 +29,26 @@ router.post("/login", (req, res) => {
         jwt.sign({ user: { username } }, SECRET_KEY, { expiresIn: "1h" }, (err, token) => {
           if (err) {
             console.error(err);
-             res.status(500).json({ error: true, message: "Error en el token" });
+            res.status(500).json({ error: true, message: "Error en el token" });
             return;
           }
-          res.json({ token });
+          UsuarioBusiness.updateLoginUser(resultados[0].idUsuario)
+          .then((resultados) => {
+            console.log("Resultados:", resultados);
+          })
+          .catch((error) => {
+            console.error("Error en el registro:", error);
+          });
+          res.status(200).json({ token: token, user: resultados[0] });
         });
       } else {
         // Credenciales inválidas, retorna un error de autenticación
         res.status(401).json({error: true, message: "Credenciales inválidas"});
+        console.log(`Usr: ${username} Pass: ${password}`);
       }
     })
     .catch((error) => {
-      console.error("Error en el registro:", error);
+      console.error("Error en el inicio de sesión:", error);
       res.status(500).json({ error: true, message: 'Error al iniciar sesión' });
     });
 });
@@ -56,7 +67,7 @@ router.post("/registro", (req, res) => {
     celular,
     contrasena,
     "",
-    null,
+    new Date().toISOString().slice(0, 19).replace("T", " "),
     otp,
     null
   );

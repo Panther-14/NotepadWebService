@@ -40,9 +40,9 @@ async function updateNote({ idUsuario, idNota, titulo, contenido, idPrioridad })
   }
 }
 
-async function deleteNote(idNota){
+async function deleteNote(idNota, idUsuario){
   try{
-    const resultados = await NoteDAO.eliminarNota(idNota);
+    const resultados = await NoteDAO.eliminarNota(idNota, idUsuario);
     return resultados;
   } catch (error){
     console.error(error);

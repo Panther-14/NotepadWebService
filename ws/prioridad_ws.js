@@ -11,9 +11,9 @@ router.get('/consultar', (req, res) => {
     .then((resultados) => {
       console.log('Resultados:', resultados);
       if(resultados.length > 0){
-        res.status(200).json({ error: false, message: 'Consulta de Prioridades exitosa', resultados: resultados});
+        res.status(200).json({ error: false, message: 'Consulta de Prioridades exitosa', priorities: resultados});
       }else{
-        res.status(200).json({ error: false, message: 'Nada que mostrar', resultados: resultados});
+        res.status(200).json({ error: false, message: 'Nada que mostrar', priorities: resultados});
       }
     })
     .catch((error) => {

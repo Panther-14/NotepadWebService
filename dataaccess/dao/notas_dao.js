@@ -45,10 +45,10 @@ function actualizarNota({ idUsuario, idNota, titulo, contenido, idPrioridad}){
   });
 }
 
-function eliminarNota(idNota){
+function eliminarNota(idNota, idUsuario){
   return new Promise((resolve, reject) => {
-    const sql = 'UPDATE notas SET eliminado = ? WHERE idNota = ?;';
-    const values = [1, idNota];
+    const sql = 'UPDATE notas SET eliminado = ? WHERE idNota = ? AND idUsuario = ?;';
+    const values = [1, idNota, idUsuario];
     
     connection.query(sql, values, (error, results) => {
       if (error) {

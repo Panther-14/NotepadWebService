@@ -42,6 +42,16 @@ async function updateUser({ idUsuario, nombre, apellidos, contrasena }) {
   }
 }
 
+async function updateLoginUser(idUsuario) {
+  try {
+    const resultados = await UserDAO.actualizarAccesoUsuario(idUsuario);
+    return resultados;
+  } catch (error) {
+    console.error(error);
+    return error;
+  }
+}
+
 
 
 module.exports = {
@@ -49,4 +59,5 @@ module.exports = {
   registerUser,
   activateUser,
   updateUser,
+  updateLoginUser
 }

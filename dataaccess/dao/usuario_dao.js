@@ -2,7 +2,7 @@ const connection = require('../db_connection');
 
 function accederUsuario(username, password) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT celular, contrasena FROM usuarios WHERE celular = ? AND contrasena = ?';
+    const sql = 'SELECT * FROM usuarios WHERE celular = ? AND contrasena = ?';
     const values = [username, password];
     connection.query(sql, values, (error, results, fields) => {
       if (error) {
@@ -58,9 +58,25 @@ function actualizarUsuario({ idUsuario, nombre, apellidos, contrasena }) {
   });
 }
 
+function actualizarAccesoUsuario(idUsuario) {
+  return new Promise((resolve, reject) => {
+    const sql = 'UPDATE usuarios SET tiempoUltimoAcceso = NOW() WHERE idUsuario = ?';
+    const values = [idUsuario];
+
+    connection.query(sql, values, (error, results, fields) => {
+      if (error) {
+        reject(error);
+        return;
+      }
+      resolve(results);
+    });
+  });
+}
+
 module.exports = {
   accederUsuario,
   registroUsuario,
   activarUsuario,
   actualizarUsuario,
+  actualizarAccesoUsuario
 };

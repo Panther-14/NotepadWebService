@@ -13,9 +13,9 @@ router.get('/consultar/:idUsuario', (req, res) => {
     .then((resultados) => {
       console.log('Resultados:', resultados);
       if(resultados.length > 0){
-        res.status(200).json({ error: false, message: 'Consulta de Libreta exitosa', resultados: resultados});
+        res.status(200).json({ error: false, message: 'Consulta de Libreta exitosa', notebooks: resultados});
       }else{
-        res.status(200).json({ error: false, message: 'Nada que mostrar', resultados: resultados});
+        res.status(200).json({ error: false, message: 'Nada que mostrar', notebooks: resultados});
       }
     })
     .catch((error) => {
