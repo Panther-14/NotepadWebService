@@ -2,8 +2,8 @@ const connection = require('../db_connection');
 
 function accederUsuario(username, password) {
   return new Promise((resolve, reject) => {
-    const sql = 'SELECT * FROM usuarios WHERE celular = ? AND contrasena = ?';
-    const values = [username, password];
+    const sql = 'SELECT * FROM usuarios WHERE celular = ? AND contrasena = ? AND activo = ?';
+    const values = [username, password, 1];
     connection.query(sql, values, (error, results, fields) => {
       if (error) {
         reject(error);
