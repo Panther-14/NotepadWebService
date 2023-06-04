@@ -46,7 +46,7 @@ function actualizarLibretaUsuario({ nombre, colorHexadecimal, idLibreta, idUsuar
 
 function eliminarLibretaUsuario({ idLibreta, idUsuario }) {
   return new Promise((resolve, reject) => {
-    const sql = 'DELETE FROM libretas WHERE idLibreta = ? AND idUsuario = ?;';
+    const sql = 'UPDATE libretas SET eliminado = ? WHERE idLibreta = ? AND idUsuario = ?;';
     const values = [idLibreta, idUsuario];
 
     connection.query(sql, values, (error, results) => {

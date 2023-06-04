@@ -17,9 +17,6 @@ router.post("/login", (req, res) => {
   // Obtiene el nombre de usuario y la contraseña del cuerpo de la solicitud
   const { celular: username, contrasena: password } = req.body;
 
-
-  console.log(req.body);
-
   UsuarioBusiness.loginUser(username, password)
     .then((resultados) => {
       console.log("Resultados:", resultados);
@@ -57,7 +54,6 @@ router.post("/registro", (req, res) => {
   const { nombres, apellidos, celular, contrasena } = req.body;
 
   const otp = generateRandomNumber(6);
-  console.log(otp);
 
   const usuario = new Usuario(
     nombres,

@@ -70,7 +70,6 @@ function existeNota(titulo){
         return;
       }
       resolve(results);
-      console.log("Results:", results);
     });
   });
 }
